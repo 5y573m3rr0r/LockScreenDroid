@@ -6,6 +6,10 @@
     android:layout_height="match_parent"
     android:background="@color/bg_color"
     tools:context=".MainActivity">
+    <include layout="@layout/actionbar_toolbar"
+        android:id="@+id/action_toolbar">
+
+    </include>
 
     <Button
         android:id="@+id/enable_pernmission_button"
