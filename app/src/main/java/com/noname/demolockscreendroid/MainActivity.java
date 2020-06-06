@@ -19,12 +19,11 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button disableButton, enableButton,lockButton;
-    public static final int RESULT_ENABLE =11;
+    public static final int RESULT_ENABLE =0;
     private DevicePolicyManager devicePolicyManager;
     private ActivityManager activityManager;
     private ComponentName componentName;
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,15 +36,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         lockButton = (Button)findViewById( R.id.lock );
         enableButton = (Button)findViewById( R.id.enable_pernmission_button );
         disableButton = (Button)findViewById( R.id.disable_permission_button );
-        lockButton.setOnClickListener( this::onClick );
-        enableButton.setOnClickListener( this::onClick );
-        disableButton.setOnClickListener( this::onClick );
+        lockButton.setOnClickListener( this );
+        enableButton.setOnClickListener( this );
+        disableButton.setOnClickListener( this );
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         boolean isActive = devicePolicyManager.isAdminActive( componentName );
+        disableButton.setVisibility( isActive? View.VISIBLE: View.GONE );
+        enableButton.setVisibility( isActive? View.GONE:View.VISIBLE );
     }
 
     @Override
@@ -53,7 +54,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     if(view ==lockButton){
             boolean active = devicePolicyManager.isAdminActive( componentName );
             if(active){
-                devicePolicyManager.lockNow();
+                try {
+                    devicePolicyManager.lockNow();
+                }catch (Exception e){
+                    Toast.makeText( this,e.toString(),Toast.LENGTH_LONG ).show();
+                }
+
             }else{
                 Toast.makeText( this,"Please enable Admin Device Permission",Toast.LENGTH_SHORT ).show();
             }
@@ -62,6 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         intent.putExtra( DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName );
         intent.putExtra( DevicePolicyManager.EXTRA_ADD_EXPLANATION, "Additional text explains why we need permission" );
         startActivityForResult( intent,RESULT_ENABLE );
+
     } else if (view == disableButton) {
         devicePolicyManager.removeActiveAdmin( componentName );
         disableButton.setVisibility( View.GONE );
