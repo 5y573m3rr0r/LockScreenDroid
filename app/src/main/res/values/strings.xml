@@ -1,5 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">LockScreenDroid</string>
+    <string name="app_name">LOCK SCREEN DROID</string>
     <string name="enable_device_admin_permission">Enable Device admin Permission</string>
     <string name="disable_device_admin_permission">Disable device admin permission</string>
     <string name="lock">LOCK</string>
