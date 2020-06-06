@@ -10,6 +10,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.admin.DevicePolicyManager;
 import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         Toolbar customizedToolbar = (Toolbar) findViewById(R.id.action_toolbar);
         setSupportActionBar(customizedToolbar);
-        devicePolicyManager= (DevicePolicyManager)getSystemService( DEVICE_POLICY_SERVICE );
+        devicePolicyManager= (DevicePolicyManager)getSystemService( Context.DEVICE_POLICY_SERVICE );
         activityManager = (ActivityManager)getSystemService( ACTIVITY_SERVICE );
         componentName = new ComponentName( this , DeviceAdmin.class );
         lockButton = (Button)findViewById( R.id.lock );
