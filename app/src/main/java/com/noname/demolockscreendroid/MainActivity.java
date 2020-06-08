@@ -54,28 +54,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-    if(view ==lockButton||onScreenWidgetLockImageButton){
+        if (view == lockButton) {
             boolean active = devicePolicyManager.isAdminActive( componentName );
-            if(active){
+            if (active) {
                 try {
                     devicePolicyManager.lockNow();
-                }catch (Exception e){
-                    Toast.makeText( this,e.toString(),Toast.LENGTH_LONG ).show();
+                } catch (Exception e) {
+                    Toast.makeText( this, e.toString(), Toast.LENGTH_LONG ).show();
                 }
 
-            }else{
-                Toast.makeText( this,"Please enable Admin Device Permission",Toast.LENGTH_SHORT ).show();
+            } else {
+                Toast.makeText( this, "Please enable Admin Device Permission", Toast.LENGTH_SHORT ).show();
             }
-    } else if ( view == enableButton){
-        Intent intent = new Intent(DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN);
-        intent.putExtra( DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName );
-        intent.putExtra( DevicePolicyManager.EXTRA_ADD_EXPLANATION, "Additional text explains why we need permission" );
-        startActivityForResult( intent,RESULT_ENABLE );
+        } else if (view == enableButton) {
+            Intent intent = new Intent( DevicePolicyManager.ACTION_ADD_DEVICE_ADMIN );
+            intent.putExtra( DevicePolicyManager.EXTRA_DEVICE_ADMIN, componentName );
+            intent.putExtra( DevicePolicyManager.EXTRA_ADD_EXPLANATION, "Additional text explains why we need permission" );
+            startActivityForResult( intent, RESULT_ENABLE );
 
-    } else if (view == disableButton) {
-        devicePolicyManager.removeActiveAdmin( componentName );
-        disableButton.setVisibility( View.GONE );
-        enableButton.setVisibility( View.VISIBLE );
+        } else if (view == disableButton) {
+            devicePolicyManager.removeActiveAdmin( componentName );
+            disableButton.setVisibility( View.GONE );
+            enableButton.setVisibility( View.VISIBLE );
+        } else if (view == onScreenWidgetLockImageButton) {
+            boolean active = devicePolicyManager.isAdminActive( componentName );
+            if (active) {
+                try {
+                    devicePolicyManager.lockNow();
+                } catch (Exception e) {
+                    Toast.makeText( this, e.toString(), Toast.LENGTH_LONG ).show();
+                }
+
+            } else {
+                Toast.makeText( this, "Please enable Admin Device Permission", Toast.LENGTH_SHORT ).show();
+            }
         }
     }
 
