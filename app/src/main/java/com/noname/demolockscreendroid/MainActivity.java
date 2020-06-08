@@ -19,7 +19,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button disableButton, enableButton,lockButton;
+    private Button disableButton, enableButton,lockButton,onScreenWidgetLockImageButton;
     public static final int RESULT_ENABLE =0;
     private DevicePolicyManager devicePolicyManager;
     private ActivityManager activityManager;
@@ -37,9 +37,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         lockButton = (Button)findViewById( R.id.lock );
         enableButton = (Button)findViewById( R.id.enable_pernmission_button );
         disableButton = (Button)findViewById( R.id.disable_permission_button );
-        lockButton.setOnClickListener( this );
-        enableButton.setOnClickListener( this );
-        disableButton.setOnClickListener( this );
+        onScreenWidgetLockImageButton= (Button)findViewById( R.id.lock_widget_image_button );
+        lockButton.setOnClickListener( this::onClick );
+        enableButton.setOnClickListener( this::onClick );
+        disableButton.setOnClickListener( this::onClick );
+        onScreenWidgetLockImageButton.setOnClickListener( this::onClick );
     }
 
     @Override
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-    if(view ==lockButton){
+    if(view ==lockButton||onScreenWidgetLockImageButton){
             boolean active = devicePolicyManager.isAdminActive( componentName );
             if(active){
                 try {
