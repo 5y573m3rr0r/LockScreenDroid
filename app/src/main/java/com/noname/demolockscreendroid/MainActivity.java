@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         lockButton.setOnClickListener( this::onClick );
         enableButton.setOnClickListener( this::onClick );
         disableButton.setOnClickListener( this::onClick );
-        onScreenWidgetLockImageButton.setOnClickListener( this::onClick );
+        //onScreenWidgetLockImageButton.setOnClickListener( this::onClick );
     }
 
     @Override
@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             devicePolicyManager.removeActiveAdmin( componentName );
             disableButton.setVisibility( View.GONE );
             enableButton.setVisibility( View.VISIBLE );
-        } else if (view == onScreenWidgetLockImageButton) {
+        } /*else if (view == onScreenWidgetLockImageButton) {
             boolean active = devicePolicyManager.isAdminActive( componentName );
             if (active) {
                 try {
@@ -85,10 +85,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText( this, e.toString(), Toast.LENGTH_LONG ).show();
                 }
 
-            } else {
+            } */else {
                 Toast.makeText( this, "Please enable Admin Device Permission", Toast.LENGTH_SHORT ).show();
             }
-        }
     }
 
     @Override
