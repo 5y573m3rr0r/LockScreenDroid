@@ -16,10 +16,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button disableButton, enableButton,lockButton,onScreenWidgetLockImageButton;
+    private Button disableButton;
+    private Button enableButton;
+    private Button lockButton;
+  //  private ImageButton onScreenWidgetLockImageButton;
     public static final int RESULT_ENABLE =0;
     private DevicePolicyManager devicePolicyManager;
     private ActivityManager activityManager;
@@ -37,11 +41,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         lockButton = (Button)findViewById( R.id.lock );
         enableButton = (Button)findViewById( R.id.enable_pernmission_button );
         disableButton = (Button)findViewById( R.id.disable_permission_button );
-        onScreenWidgetLockImageButton= (Button)findViewById( R.id.lock_widget_image_button );
+       // onScreenWidgetLockImageButton= (ImageButton)findViewById( R.id.lock_widget_image_button );
         lockButton.setOnClickListener( this::onClick );
         enableButton.setOnClickListener( this::onClick );
         disableButton.setOnClickListener( this::onClick );
-        //onScreenWidgetLockImageButton.setOnClickListener( this::onClick );
+      //  onScreenWidgetLockImageButton.setOnClickListener( this::onClick );
     }
 
     @Override
@@ -85,7 +89,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText( this, e.toString(), Toast.LENGTH_LONG ).show();
                 }
 
-            } */else {
+            }
+        }*/
+        else {
                 Toast.makeText( this, "Please enable Admin Device Permission", Toast.LENGTH_SHORT ).show();
             }
     }
